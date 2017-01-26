@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  
+    <link rel = 'stylesheet' href = '/stylesheets/style.css' />
+
+    <link rel = "stylesheet" href = "bootstrap/css/bootstrap.min.css"/>
+    <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <style type = "text/css">
+      
+      h1{
+        
+        font-size : 50px;
+        background-color : #a6ff57; 
+
+      }
+
+    </style>
+
+  </head>
+  <body>
+  <div class = "row">
+    <h1><center>LEDERBOARD</center></h1>
+    <br><br>
+  </div>
+  <div class = "container">
+     	
+    <table class = "table table-bordered table-striped" border = '3' cellpadding = "1" cellpadding = "1" >
+    <thead bgcolor = "lightblue" class = "text-center" >
+      <tr>
+        <th class = "text-center" > Sr No.</th>
+        <th class = "text-center" >Name</th>
+      
+        <th class = "text-center" >Score</th>
+        <th class = "text-center" >Date</th>
+        
+      </tr>
+      </thead>
+      <tbody>
+      <% quizs.forEach(function (e, i){ %>
+      <tr>
+        <td class = "text-center" ><%= i+1 %></td>
+        <td class = "text-center" ><%= e.name %></td>
+        <td class = "text-center" ><%= e.score %></td>
+        <td class = "text-center" ><%= e.date %></td>
+      </tr>
+      <%});%>
+      </tbody>
+    </table>
+
+
+
+   </div>
+  </body>
+</html>

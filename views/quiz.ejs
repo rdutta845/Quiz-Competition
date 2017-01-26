@@ -1,0 +1,123 @@
+<html>
+
+
+<head>
+
+	<link rel = "stylesheet" href = "bootstrap/css/bootstrap.min.css" >
+	<script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js" ></script>
+
+	<style type = "text/css" >
+		p{
+
+			padding-left : 30px;
+			font-size : 20px; 
+		}
+		
+		h1{
+
+			font-size : 50px;
+			background-color : lightblue; 
+		}
+        #name{
+
+            font-size : 30px;
+
+        }
+	</style>
+
+</head>
+
+<body>
+    
+    <h1><center>Quiz Competetion</center></h1>
+
+    <div class = "container" >
+    	<div class = "row">
+
+        <center><input type = "text" id = "txt" class = "form-control" placeholder = "Enter Your Name Here.....">  
+        <b><p id = "name">Enter Your Name</p></b></center><br><br>
+    	
+    		<%	for( var itr = Math.round(Math.random() * 10), sum = 0 ; sum < 5 ; itr++ ){ %>
+
+    		<%  quizs.forEach( function (result,i){ %>
+    		
+    		<% if( itr >= 10){ %>
+    		<% itr = itr % 10;%>
+    		<%}%>
+
+
+    		<% if( itr   == i){%>
+    			<div class = "panel panel-default">
+    				<div class = "panel panel-heading" id = "question" >
+    					<p id = "Ques<%= i %>"><b><i>
+                        <%= sum + 1 %><%= ":-"%>
+                        <% console.log(sum) %>
+    					<%= result.question %>
+    					</i></b></p>
+    				</div>
+    				<br>
+    				<div class = "panel panel-body radio">
+    					<label>
+    					<input type = "radio" name = "opt<%= i %>" value = "<%= result.answers[0] %>" ><p id = "opt1" class = "form-control"  ><%= result.answers[0] %></p>
+    					<input type = "radio" name = "opt<%= i %>" value = "<%= result.answers[1] %>" ><p id = "opt2" class = "form-control"  ><%= result.answers[1] %></p>
+    					<input type = "radio" name = "opt<%= i %>" value = "<%= result.answers[2] %>" ><p id = "opt3" class = "form-control"  ><%= result.answers[2] %></p>
+    					<input type = "radio" name = "opt<%= i %>" value = "<%= result.answers[3] %>" ><p id = "opt4" class = "form-control"  ><%= result.answers[3] %></p>
+    					</label>
+    				</div>
+
+     			</div>
+    		
+
+
+  	  		<br><br>
+    						<%}%>
+    					<%})%>
+    				<% sum = sum + 1 %>
+ 				<%}%>
+
+    	</div>
+
+    </div>
+		<center><button type = "button" class = "btn btn-danger btn-lg" id = "btn-sub">Submit</button></center>
+
+    <script type="text/javascript">
+        
+    
+
+        $("#btn-sub").click(function (){
+            var obj = [];
+            var res = [];
+            var name = $("#txt").val();
+            <% quizs.forEach(function (result, itr) { %>
+            var radioValue = $("input[name='opt<%= itr %>']:checked").val();
+            var id = '<%= result._id %>';
+            var ins = {"id" : id, "result" : radioValue};
+            obj.push(ins);
+            
+            <%})%>
+
+          
+       
+        console.log(obj);
+        $.ajax({                    
+        url: '/quiz',     
+        type: 'post',
+
+        data : { name : name, obj : obj},
+                     
+        success: function (result)      
+        {
+        
+        window.location.href="/quiz/leader";
+        } 
+        });
+    });
+
+
+
+    </script>
+	
+	
+  	</body>
+</html>	
+										
