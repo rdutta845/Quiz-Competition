@@ -22,8 +22,9 @@ router.get('/', function (req, res, next) {
   })
 });
 
-router.get('/leader', function (req, res, next) {
+router.get('/leader/:id?', function (req, res, next) {
   //var obj = { "ques" : ques, "answer" : ans, "option" : opt};
+  console.log(req.params.id);
   
   Leader.find({}).sort({ score : -1 }).exec(function (err, quizs){
   	if(err){
@@ -31,7 +32,7 @@ router.get('/leader', function (req, res, next) {
   		}
   	 
   	//console.log(quizs);
-  	res.render('leaderboard', { quizs : quizs });
+  	res.render('leaderboard', { quizs : quizs , id : req.params.id});
   })
 });
 
@@ -69,14 +70,14 @@ router.post('/',function (req,res){
 
  				var value = { "name" : name, "score" : point}
  				var leader = new Leader(value);
- 				leader.save(function(err,result){
+ 				leader.save(function (err, result){
 					
 				if(err){
 					return res.json({error : true , reason : err});
 
 				}
         console.log(result);
-				return res.json({error : false});
+				return res.json({error : false, id: result._id});
 
 				});
  						
