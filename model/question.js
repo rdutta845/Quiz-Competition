@@ -7,11 +7,11 @@ var QuizSchema = new mongoose.Schema({
 	
 	question :{ 
 		type : [String],
-		unique: true
+		unique : true
 	},
 	answers : {
-		type: [String],
-		unique: true
+		type : [String],
+		unique : true
 		
 	},
 	correct : {
@@ -22,5 +22,5 @@ var QuizSchema = new mongoose.Schema({
 
 });
 
-module.exports = mongoose.model('Quiz',QuizSchema);
+module.exports = mongoose.model('Quiz', QuizSchema);
 //mongoose is a odm object data model 

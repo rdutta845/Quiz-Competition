@@ -11,12 +11,12 @@ var LeaderSchema = new mongoose.Schema({
 			type : Number
 		},
 		date : {
-			type: Date, 
-			default: Date.now
+			type : Date, 
+			default : Date.now
 		}
 		
 	
 });
 
-module.exports = mongoose.model('leaderboard',LeaderSchema);
+module.exports = mongoose.model('leaderboard', LeaderSchema);
 //mongoose is a odm object data model 
